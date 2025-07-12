@@ -1,1 +1,4 @@
-selenium
+fastapi
+uvicorn
+pydantic
+playwright
