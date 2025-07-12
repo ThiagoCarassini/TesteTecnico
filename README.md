@@ -19,13 +19,14 @@ Este projeto foi desenvolvido como parte de um desafio técnico para a vaga de D
 ```
 TesteTecnico/
 ├── agent/
-│   └── main.py                # Agente LLM com LangChain e OpenAI
+│   ├── main.py
+│   └── requirements.txt
 ├── scraper/
-│   └── main.py                # Web scraper do site da OAB (CNA)
+│   ├── main.py
+│   └── requirements.txt
 ├── requirements.txt
 ├── Dockerfile
 ├── docker-compose.yml
-├── venv/                      # Ambiente virtual Python
 └── README.md
 ```
 
@@ -59,21 +60,32 @@ docker-compose up --build
 
 ## Instalação e Execução com Ambiente Virtual (venv)
 
-Como alternativa ao Docker, você pode rodar o projeto localmente com `venv`:
+Como alternativa ao Docker, é possível rodar o projeto localmente utilizando um ambiente virtual com `venv`.
+
+### Crie e ative o ambiente virtual:
 
 ```bash
-# Crie e ative o ambiente virtual
 python3 -m venv venv
 source venv/bin/activate  # ou .\venv\Scripts\activate no Windows
+```
 
-# Instale as dependências
-pip install -r requirements.txt
+### Instale as dependências:
 
-# Exporte sua chave da OpenAI
+```bash
+pip install -r scraper/requirements.txt
+pip install -r agent/requirements.txt
+```
+
+### Defina a variável de ambiente com sua chave da OpenAI:
+
+```bash
 export OPENAI_API_KEY=sua_chave_aqui  # Linux/macOS
 set OPENAI_API_KEY=sua_chave_aqui     # Windows
+```
 
-# Execute os serviços manualmente
+### Execute os serviços manualmente:
+
+```bash
 uvicorn scraper.main:app --port 8000
 uvicorn agent.main:app --port 8001
 ```
@@ -176,10 +188,11 @@ O ambiente foi criado com o seguinte comando:
 python3 -m venv venv
 ```
 
-Após a ativação do ambiente virtual, instalei as dependências com:
+Após a ativação do ambiente virtual, instalei as dependências separadamente para o scraper e para o agente:
 
 ```bash
-pip install -r requirements.txt
+pip install -r scraper/requirements.txt
+pip install -r agent/requirements.txt
 ```
 
 Os serviços foram então executados diretamente via Uvicorn:
